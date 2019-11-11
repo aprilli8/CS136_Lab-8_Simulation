@@ -1,9 +1,11 @@
-import java.util.Vector;
+//I am the sole author of the work in this repository.
+
 import java.util.Random;
 import structure5.*;
 
 /**
- * TODO: class description here.
+ * This abstract class is intended to represent a scenario in which a queue of
+ multiple customers are to be served by a number of service tellers.
  */
 public abstract class BusinessSimulation {
 
@@ -19,21 +21,32 @@ public abstract class BusinessSimulation {
 	/* seed for Random() so that simulation is repeatable */
 	protected int seed;
 
+	/* sum of the wait times for all customers */
+	protected int totalWaitTime;
+
+	/* keeps track of the total number of customers */
+	protected int totalCustomers;
+
 	/* Used to bound the range of service times that Customers require */
-	public static final int MIN_SERVICE_TIME = -1; //TODO: set appropraitely
-	public static final int MAX_SERVICE_TIME = -1; //TODO: set appropriately
+	public static final int MIN_SERVICE_TIME = 5;
+	public static final int MAX_SERVICE_TIME = 30;
 
 	/**
 	 * Creates a BusinessSimulation.
-	 * @post the step() function may be called.
+	 * @post A businessSimulation object is created
 	 *
 	 * @param numCustomers number of random customers that appear in the simulation
-	 * @param numSerivicePoints number of tellers in this simulation
+	 * @param numServicePoints number of tellers in this simulation
 	 * @param maxEventStart latest timeStep that a Customer may appear in the simulation
 	 * @param seed used to seed a Random() so that simulation is repeatable.
 	 */
-	public BusinessSimulation(int numCustomers, int numServicePoints,
-				  int maxEventStart, int seed) { }
+	public BusinessSimulation(int numCustomers, int numServicePoints, int maxEventStart, int seed){
+		servicePoints = new Vector<Queue<Customer>>(numServicePoints);
+		eventQueue = generateCustomerSequence(numCustomers, maxEventStart, seed);
+		time = 0;
+		totalWaitTime = 0;
+		totalCustomers = numCustomers;
+	}
 
 	/**
 	 * Generates a sequence of Customer objects, stored in a PriorityQueue.
@@ -42,16 +55,19 @@ public abstract class BusinessSimulation {
 	 * @param maxEventStart maximum timeStep that a customer arrives
 	 *      in @eventQueue
 	 * @param seed use Random(seed) to make customer sequence repeatable
-	 * @pre
-	 * @post
+	 * @pre numCustomers, maxEventStart, and seed are valid integers
+	 * @post returns a PriorityQueue of Customers that were generated with
+	 * 				random arrival times and service time amounts
 	 * @return A PriorityQueue that represents Customer arrivals,
 	 *         ordered by Customer arrival time
 	 */
-	public static PriorityQueue<Customer> generateCustomerSequence(int numCustomers,
-								       int maxEventStart,
-								       int seed) {
-		//TODO: complete this method
-		return null;
+	public static PriorityQueue<Customer> generateCustomerSequence(int numCustomers, int maxEventStart, int seed){
+		VectorHeap<Customer> tempQueue = new VectorHeap<Customer>();
+		Random rand = new Random(seed);
+		for(int i = 0; i < numCustomers; i++){
+			tempQueue.add(new Customer(rand.nextInt(maxEventStart), rand.nextInt(MAX_SERVICE_TIME-MIN_SERVICE_TIME)+MIN_SERVICE_TIME));
+		}
+		return tempQueue;
 	}
 
 	/**
@@ -79,6 +95,7 @@ public abstract class BusinessSimulation {
 				str = str + "Service Point: " + sp.toString() + "\n";
 			}
 		}
+		str = str + "Average Wait Time: " + (double)totalWaitTime/totalCustomers + "\n";
 
 		return str;
 	}
