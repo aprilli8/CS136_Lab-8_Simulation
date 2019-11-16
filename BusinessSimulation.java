@@ -70,6 +70,16 @@ public abstract class BusinessSimulation {
 		return tempQueue;
 	}
 
+	//$(-1) If you think about your step() method in each subclass, they essentially follow the same strategy: advance as many active customers as possible to open tellers, then advance all customers currently at an active teller. Why not implement step() in the base class, and then implement only the functionality that is different in the subclasses.
+  //$  step() {
+  //$   ...
+  //$   advanceCustomersToTellers();
+  //$   ...
+  //$   advanceCustomersAtServicePoints();
+  //$   ...
+  //$   return notDone;
+  //$  }
+	
 	/**
 	 * Advances 1 time step through the simulation.
 	 *
