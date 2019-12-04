@@ -34,6 +34,7 @@ public class Customer implements Comparable<Customer> {
 	 time of the current customer is greater, 0 means that they are equal, and -1
 	 means that the current customer's arrival time is smaller than the other
 	 */
+    //$ how about just 1 line: return arrivalTime - other.getArrivalTime(); ?
 	public int compareTo(Customer other) {
 		if(arrivalTime > other.getArrivalTime()){
 			return 1;

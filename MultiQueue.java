@@ -19,6 +19,7 @@ public class MultiQueue extends BusinessSimulation{
   //pre: none
   //post: performs all necessary functions in a time step and returns true if
   // the simulation is over, false if not
+	//$(-0.5) Could we break this up into more functions that are simpler?
   public boolean step(){
     //boolean variable to represent whether or not eventQueue is empty
     boolean emptyLine = false;
