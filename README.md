@@ -1,16 +1,3 @@
 # Lab 8: Waiting in Line
 
-# Lab 8 High-level Feedback
- * Good job with the implementation
- * Think about how you're abstracting your code
-
-__Lab 1 Score: 26.5/29: 23.5/25 for code; 3/4 for questions__
-__Reviewed by Bill__
-
-## Useful Links
- * [Course Homepage](https://williams-cs.github.io/cs136-f19-www/) (with TA schedule)
- * [Lab Webpage](https://williams-cs.github.io/cs136-f19-www/labs/simulation.html)
- * [structure5](http://www.cs.williams.edu/~bailey/JavaStructures/doc/structure5/index.html) documentation
- * [GitHub markdown](https://guides.github.com/features/mastering-markdown/) syntax
-
-
+In this lab, we built a simulation for two possible business scenarios. The first is modeled after many supermarkets and retail stores, where customers select and wait in one of several available queues to purchase items. Once in a queue, they wait until the cashier has finished serving the customers ahead of them. The second is modeled after many banks, where customers wait in a single queue. When a teller becomes available, the customer at the front of the queue is serviced by that teller. The performance of each approach is then measured and compared.
